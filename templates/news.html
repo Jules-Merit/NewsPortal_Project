@@ -1,0 +1,34 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+
+{% block content %}
+<h1>Последние новости</h1>
+<hr>
+{% if news %}
+       <table align=center width=70%>
+           <tr>
+               <td>Title</td>
+               <td>Preview</td>
+               <td>Category</td>
+               <td>Type</td>
+               <td>Date</td>
+           </tr>
+
+           {% for post in news %}
+           <tr>
+               <td>{{ post.head_text|censor }}</td>
+               <td>{{ post.preview|censor }}</td>
+               <td>{% for category in post.post_cat.all %}
+                    {{ category.cat_name }}
+                {% endfor %}
+               </td>
+               <td>{{ post.get_post_type_display }}</td>
+               <td>{{ post.post_data | date:"d-m-Y" }}</td>
+           </tr>
+           {% endfor %}
+
+       </table>
+   {% else %}
+       <h2>Новостей нет!</h2>
+   {% endif %}
+{% endblock %}

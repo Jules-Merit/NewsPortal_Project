@@ -1,0 +1,12 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+
+{% block content %}
+<h1>{{ post.head_text|censor }}</h1>
+<div align=center width=70%>
+    <p style="font-size: 20px">{{ post.text|censor }}<p>
+</div>
+<div align=right width=70% >
+    {{ post.post_data | date:"d-m-Y" }}
+</div>
+{% endblock content %}

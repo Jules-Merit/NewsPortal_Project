@@ -20,6 +20,9 @@ class Author(models.Model):
 class Category(models.Model):
     cat_name = models.CharField(max_length=25, unique=True)
 
+    def __str__(self):
+        return self.cat_name.title()
+
 
 post = 'PO'
 news = 'NE'
@@ -48,10 +51,14 @@ class Post(models.Model):
         self.save()
 
     def preview(self):
-        if len(self.text) > 124:
-            return self.text[:124] + "..."
+        if len(self.text) > 20:
+            return self.text[:20] + "..."
         else:
-            return self.text
+            return self.text.title()
+
+    def __str__(self):
+        date = self.post_data.strftime('%d-%m-%Y')
+        return f'{self.head_text.title()}: {self.preview()} : {date}'
 
 
 class PostCategory(models.Model):
